@@ -13,7 +13,7 @@ There are 2 ways to do it
 
 usually the value called v1 , v2 ..etc
 refers to which version of caching to be easy to differentiate */
-const cacheName = 'v1'
+const cacheName = 'v1111111111111'
 
 /* here we gonna create an array holding all of our assets 
 array of all of our pages.
@@ -29,7 +29,8 @@ const cacheAssets = [
     'index.html',
     'about.html',
     '/css/style.css',
-    '/js/main.js'
+    '/js/main.js',
+    '/'
 ]
 
  
@@ -40,7 +41,8 @@ self.addEventListener('install' , (e)=>{
     console.log('Service Worker : Installed ');
 
     /*Caching Assets
-        which is basically telling the browser to wait until the promise is finished until it get rids of the service worker */
+        which is basically telling the browser to wait until the promise is finished until 
+        it get rids of the service worker */
     e.waitUntil(
         /* 
         ==>here we gonna use "caches" storage API.
@@ -82,7 +84,7 @@ self.addEventListener('activate' , (e)=>{
         ==> what we are doing here ? caches.keys()
         we gonna loop through the caches & we gonna have a condition that says : if the current cache isn't the cache we are looping through in the current iteration we want to delete it 
         
-        ==> caches.keys() returns a promise
+        ==> caches.keys() returns a promise , and return array of cached keys
         */
         caches.keys()
         /* cacheNames represent all version of the cache v1 , v2*/
@@ -125,19 +127,18 @@ self.addEventListener('fetch', (e)=>{
         we can get that with the event parameter (e).request.
         if there is no connection this gonna fail.
         ==> it returns a (promise) if it fails 
+        
+        ==>I must use return if I add curley braces around the catch
          */
         fetch(e.request)
-        .catch(()=>{
             /* 
-            cache.match(): get something out of the cache , this will return a promise for a matching response if one is found or Null otherwise.
-                
+            cache.match(): get something out of the cache , this will return a promise for a matching response if one is found or Null otherwise.  
             caches.match(): does the same but it tries to find a match in any cache starting with the oldest             
             caches : Storage API
             match(): is what i wanna load from the cache.
             e.request : will load the data from the cache, the file whatefer we're looking for: index.html , about.html will load it from the cache 
             */
-            caches.match(e.request)
-        })
+        .catch(()=>caches.match(e.request))
     )
 
 })

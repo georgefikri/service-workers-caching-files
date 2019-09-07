@@ -15,7 +15,7 @@ because that's what we're we are caching the whole site intead of making an arra
 
 usually the value called v1 , v2 ..etc
 refer to which version of caching to be easy to differentiate */
-const cacheName = 'v2'
+const cacheName = 'v995'
 
 
 /* Call the Install Event:
@@ -36,7 +36,7 @@ self.addEventListener('activate' , (e)=>{
         ==> what we are doing here ? caches.keys()
         we gonna loop through the caches & we gonna have a condition that says : if the current cache isn't the cache we are looping through in the current iteration we want to delete it 
         
-        ==> caches.then() returns a promise
+        ==> caches.keys() returns a promise , and return array of cached keys
         remove unwanted cache
         */
         caches.keys()
@@ -104,9 +104,9 @@ self.addEventListener('fetch', (e)=>{
                         parameter1: we use this put method we take the initial request(elly goa kosin fetch fo2).
                         parameter2:  the clone of the response, variable above
                         */
-                        cache.put( e.request , resClone )
+                       return cache.put( e.request , resClone )
                     });
-                    /* return the response */
+                    /* return the response -elly bizahar el haga fel browser offline*/
                     return response
             })
             /* if the connection drops */
@@ -121,22 +121,27 @@ self.addEventListener('fetch', (e)=>{
                 ==>e.request: where the data come from? 
                 as long as the user went to the site once then it should be in the cache.
 
-                ==>caches.match ==> returns a promise & search all caches for a match
+                ==>caches.match ==> returns a promise & search all caches for a match.
+
+                ==> I must use return if I add curley braces around the catch
                 */
-                caches.match(e.request)
+                return caches.match(e.request)
                 /* return the response  */
                 .then(response => response)
             })
     )
     /**********************Way2  ********************/
-  /*   event.respondWith (
-		caches.match(event.request)
-		.then((response)=>{
-			if(response){
-			return response;
-			}
-			return fetch(event.request)
-			})
-    ) */
+  /*  
+          e.respondWith(
+                caches.match(e.request)
+                .then((response)=>{
+                    if(response){
+                        return response;
+                    }
+                return fetch(e.request)
+                })
+        )
+  
+  */
 
 })
