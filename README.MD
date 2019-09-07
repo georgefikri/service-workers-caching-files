@@ -11,7 +11,7 @@ This Project is about using ServiceWorkers & caching files for offline using 2 w
 
 
 ## Credits
-- main code & steps are from [Traversy Media](https://youtu.be/ksXwaWHCW6k).
+- Example Code From [Traversy Media](https://youtu.be/ksXwaWHCW6k).
 - I practiced his steps.
 
 
