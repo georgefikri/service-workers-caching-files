@@ -7,7 +7,8 @@ This Project is about using ServiceWorkers & caching files for offline using 2 w
 - sw_cached_pages.js: this file contains caching page by page.
 - sw_cached_site.js: this files contains caching the whole site.
 
-
+## Branches
+- newMaster: fixing return issue in sw_cached_pages.js & sw_cached_site.js by removing curley braces in fetch event. or adding return in fetch event.
 
 
 ## Credits
