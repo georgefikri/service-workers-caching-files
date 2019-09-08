@@ -16,7 +16,7 @@ if('serviceWorker' in navigator){
     2. .register(fileName) 
     3. .register(fileName) returns a promise */
     navigator.serviceWorker
-      .register('../sw_cached_pages.js')
+      .register('../sw_site_noComments.js')
       /* .register returns a promise */
       .then((response) =>{
         console.log('Service Worker: Registered')
