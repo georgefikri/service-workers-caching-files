@@ -123,7 +123,7 @@ self.addEventListener('fetch', (e)=>{
 
                 ==>caches.match ==> returns a promise & search all caches for a match
                 */
-                caches.match(e.request)
+                return caches.match(e.request)
                 /* return the response  */
                 .then(response => response)
             })
