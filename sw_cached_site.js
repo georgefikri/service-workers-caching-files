@@ -110,6 +110,8 @@ self.addEventListener('fetch', (e)=>{
                     return response
             })
             /* if the connection drops */
+		//alternative without curley braces or return  .catch((err) => caches.match(e.request).then(response => response))
+ 	    
             .catch((err)=>{
                 /* e.request: gaia men el fetch bin el kosin 
                 caches: storage API
